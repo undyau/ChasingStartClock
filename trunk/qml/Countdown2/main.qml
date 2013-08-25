@@ -12,6 +12,7 @@ Rectangle {
             Qt.quit();
         }
     }
+
     Rectangle {
         id: clockRect
         color: "black"
@@ -27,17 +28,45 @@ Rectangle {
             anchors.centerIn: parent
         }
     }
+    ToolButton {
+       id: openButton
+       iconSource: "fileopen.png"
+       onClicked: {
+           fileDialog.visible = true;
+       }
+       visible: false;
+    }
+    Item {
+        id: openButtonHider
+        anchors.left: parent.left
+        anchors.top: parent.top
+        width: openButton.width
+        height: openButton.height
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                openButton.visible = true;
+                visible = false;
+            }
+        }
+
+    }
+
     FileDialog {
         id: fileDialog
         title: "Choose the Start List file (in IOF 3.0 XML format)"
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
+            openButtonHider.visible = true;
+            openButton.visible = false;
         }
         onRejected: {
             console.log("Canceled")
+            openButtonHider.visible = true;
+            openButton.visible = false;
         }
-        Component.onCompleted: visible = true
+       // Component.onCompleted: visible = true
     }
     ListView {
         id: listview
