@@ -29,6 +29,25 @@ Rectangle {
         }
     }
 
+
+    Item {
+        id: midLeft
+        anchors.verticalCenter:  parent.verticalCenter
+        anchors.left: parent.left
+        Label {
+            id: labelStale
+            text: "Delete starts after:"
+            font.pixelSize: 10
+            font.italic: true
+            color: "steelblue"
+            visible: false
+            verticalAlignment: Text.AlignTop
+        }
+        TextField {
+            validator: IntValidator {bottom: -360000; top: 0;}
+            focus: true
+        }
+    }
     Item {
         id: bottomLeft
         anchors.bottom: parent.bottom
@@ -42,6 +61,7 @@ Rectangle {
                    onClicked: {
                        configOffButton.visible = true;
                        openButton.visible = true;
+                       labelStale.visible = true;
                        clock.visible = false;
                        configOnButton.visible = false;
                    }
@@ -55,6 +75,7 @@ Rectangle {
                        clock.visible = true;
                        configOnButton.visible = true;
                        configOffButton.visible = false;
+                       labelStale.visible = false;
                        openButton.visible = false;
                    }
                    visible: false;
