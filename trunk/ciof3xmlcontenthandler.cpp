@@ -52,12 +52,17 @@ void CIof3XmlContentHandler::AddPerson()
 {
     if (m_Start.size() < 19)
         return; // unknown time format
+    else if (m_Start.size() > 19)  // throw away tz info - QT can't handle it ?
+        m_Start = m_Start.left(19);
+
     QDateTime date = QDateTime::fromString(m_Start, "yyyy-MM-ddTHH:mm:ss");
+
     date.setTimeSpec(Qt::UTC);
     QDateTime local = date.toLocalTime();
 
     if (local.isValid() && (m_FName.size() > 0 || m_SName.size() > 0))
     {
+            qDebug() << "Adding person";
         CRunner* runner = new CRunner(m_FName + " " + m_SName, local, m_Class);
         m_AllRunners[local] = runner;
     }

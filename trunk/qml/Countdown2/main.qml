@@ -1,7 +1,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.0
 import QtQuick.Dialogs 1.0
+import QtQuick.Layouts 1.0
 
 Rectangle {
     id: mainRect
@@ -28,29 +28,49 @@ Rectangle {
             anchors.centerIn: parent
         }
     }
-    ToolButton {
-       id: openButton
-       iconSource: "fileopen.png"
-       onClicked: {
-           fileDialog.visible = true;
-       }
-       visible: false;
-    }
+
     Item {
-        id: openButtonHider
+        id: bottomLeft
+        anchors.bottom: parent.bottom
         anchors.left: parent.left
-        anchors.top: parent.top
-        width: openButton.width
-        height: openButton.height
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                openButton.visible = true;
-                visible = false;
+        height: 40
+        ToolBar {
+            RowLayout {
+                ToolButton {
+                   id: configOnButton
+                   iconSource: "monkey_on_32x32.png"
+                   onClicked: {
+                       configOffButton.visible = true;
+                       openButton.visible = true;
+                       clock.visible = false;
+                       configOnButton.visible = false;
+                   }
+                   visible: true;
+                }
+                ToolButton {
+                   id: configOffButton
+                   iconSource: "monkey_off_32x32.png"
+                   onClicked: {
+                       fileDialog.visible = false;
+                       clock.visible = true;
+                       configOnButton.visible = true;
+                       configOffButton.visible = false;
+                       openButton.visible = false;
+                   }
+                   visible: false;
+                }
+                ToolButton {
+                   id: openButton
+                   iconSource: "fileopen.png"
+                   onClicked: {
+                       fileDialog.visible = true;
+                   }
+                   visible: false;
+                }
             }
         }
-
     }
+
 
     FileDialog {
         id: fileDialog
@@ -58,13 +78,9 @@ Rectangle {
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
-            openButtonHider.visible = true;
-            openButton.visible = false;
         }
         onRejected: {
             console.log("Canceled")
-            openButtonHider.visible = true;
-            openButton.visible = false;
         }
        // Component.onCompleted: visible = true
     }

@@ -11,7 +11,7 @@ class CListUpdater : public QObject
     Q_OBJECT
 public:
     explicit CListUpdater(QQmlContext *a_Context, QString a_FileName, int a_LookAhead = 100000,
-                          int a_Stale = -3, int a_MaxDisplay = 10, QObject *parent = 0);
+                          int a_Stale = -30000, int a_MaxDisplay = 10, QObject *parent = 0);
 
 private:
     QList<QObject*> m_DisplayList;

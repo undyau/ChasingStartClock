@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QtQuick2ApplicationViewer viewer;
     QQmlContext *ctxt = viewer.rootContext();
 
-    CListUpdater updater(ctxt, "C:\\Users\\OW\\Desktop\\StartList.xml");
+    CListUpdater updater(ctxt, "C:\\Users\\a.simpson\\Desktop\\StartList.xml");
 
     viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
