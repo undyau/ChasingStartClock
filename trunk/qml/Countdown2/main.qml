@@ -31,64 +31,118 @@ Rectangle {
 
 
     Item {
-        id: midLeft
+        id: form
         anchors.verticalCenter:  parent.verticalCenter
         anchors.left: parent.left
-        Label {
-            id: labelStale
-            text: "Delete starts after:"
-            font.pixelSize: 10
-            font.italic: true
-            color: "steelblue"
-            visible: false
-            verticalAlignment: Text.AlignTop
-        }
-        TextField {
-            validator: IntValidator {bottom: -360000; top: 0;}
-            focus: true
+        visible: false
+        width: Math.min(clockRect.width, 30)
+        GridLayout {
+            id: grid
+            columns: 3
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            width: parent.width
+            Label {
+                text: "Delete starts after:"
+                font.pixelSize: 20
+                color: "white"
+            }
+            TextField {
+                id: staleText
+                validator: IntValidator {bottom: -360000; top: 0;}
+                focus: true
+            }
+            Label {
+                text: "seconds"
+                font.pixelSize: 20
+                color: "white"
+            }
+            Label {
+                text: "Maximum starters:"
+                font.pixelSize: 20
+                color: "white"
+            }
+            TextField {
+                id: maxStartersText
+                validator: IntValidator {bottom: 5; top: 100;}
+                focus: true
+            }
+            Label {
+                text: ""
+                font.pixelSize: 20
+                color: "white"
+            }
+            Label {
+                text: "Adjust start times by:"
+                font.pixelSize: 20
+                color: "white"
+            }
+            TextField {
+                id: adjustStartsHours
+                validator: IntValidator {bottom: -2400; top: 2400;}
+                focus: true
+            }
+            Label {
+                text: "hours"
+                font.pixelSize: 20
+                color: "white"
+            }
+            Label {
+                text: "Start file - IOF XML 3.0:"
+                font.pixelSize: 20
+                color: "white"
+            }
+            TextField {
+                id: fileName
+                focus: true
+            }
+            ToolButton {
+               id: openButton
+               iconSource: "fileopen.png"
+               onClicked: {
+                   fileDialog.visible = true;
+               }
+            }
+            Label {
+                text: ""
+                font.pixelSize: 20
+                color: "white"
+            }
+            Button {
+               text: "Make it so"
+               onClicked: {
+                   console.log("Clicked OK");
+               }
+            }
         }
     }
+
     Item {
         id: bottomLeft
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         height: 40
-        ToolBar {
-            RowLayout {
-                ToolButton {
-                   id: configOnButton
-                   iconSource: "monkey_on_32x32.png"
-                   onClicked: {
-                       configOffButton.visible = true;
-                       openButton.visible = true;
-                       labelStale.visible = true;
-                       clock.visible = false;
-                       configOnButton.visible = false;
-                   }
-                   visible: true;
-                }
-                ToolButton {
-                   id: configOffButton
-                   iconSource: "monkey_off_32x32.png"
-                   onClicked: {
-                       fileDialog.visible = false;
-                       clock.visible = true;
-                       configOnButton.visible = true;
-                       configOffButton.visible = false;
-                       labelStale.visible = false;
-                       openButton.visible = false;
-                   }
-                   visible: false;
-                }
-                ToolButton {
-                   id: openButton
-                   iconSource: "fileopen.png"
-                   onClicked: {
-                       fileDialog.visible = true;
-                   }
-                   visible: false;
-                }
-            }
+        ToolButton {
+           id: configOnButton
+           iconSource: "monkey_on_32x32.png"
+           onClicked: {
+               configOffButton.visible = true;
+               form.visible = true;
+               clock.visible = false;
+               configOnButton.visible = false;
+           }
+           visible: true;
+        }
+        ToolButton {
+           id: configOffButton
+           iconSource: "monkey_off_32x32.png"
+           onClicked: {
+               clock.visible = true;
+               configOnButton.visible = true;
+               configOffButton.visible = false;
+               form.visible = false;
+           }
+           visible: false;
         }
     }
 
@@ -99,6 +153,7 @@ Rectangle {
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
             console.log("You chose: " + fileDialog.fileUrls)
+            fileName.text = fileDialog.fileUrl;
         }
         onRejected: {
             console.log("Canceled")
