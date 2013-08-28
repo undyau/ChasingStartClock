@@ -1,4 +1,5 @@
 #include "cconfiguration.h"
+#include <QUrl>
 
 CConfiguration::CConfiguration(const QString &a_File, int a_LookAhead, int a_Stale,
                                int a_MaxDisplay, QObject *parent):
@@ -13,6 +14,15 @@ void CConfiguration::setFile(const QString &a)
         m_File = a;
         emit fileChanged();
     }
+}
+
+void CConfiguration::setFileUrl(const QString &a)
+{
+    if (a != m_FileUrl) {
+        m_FileUrl = a;
+        emit fileUrlChanged();
+    }
+    setFile(QUrl(a).toLocalFile());
 }
 
 void CConfiguration::setLookAhead(int a)

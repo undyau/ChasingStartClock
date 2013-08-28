@@ -108,8 +108,8 @@ Rectangle {
                }
             }
             Label {
-                text: ""
-                font.pixelSize: 20
+                text: "(Enter \"FAKE\" as file name to simulate start list)"
+                font.pixelSize: 12
                 color: "white"
             }
             Button {
@@ -135,7 +135,8 @@ Rectangle {
            onClicked: {
                configOffButton.visible = true;
                form.visible = true;
-               clock.visible = false;
+               clockRect.visible = false;
+               listview.visible = false;
                configOnButton.visible = false;
            }
            visible: true;
@@ -144,7 +145,8 @@ Rectangle {
            id: configOffButton
            iconSource: "monkey_off_32x32.png"
            onClicked: {
-               clock.visible = true;
+               clockRect.visible = true;
+               listview.visible = true;
                configOnButton.visible = true;
                configOffButton.visible = false;
                form.visible = false;
@@ -159,7 +161,7 @@ Rectangle {
         title: "Choose the Start List file (in IOF 3.0 XML format)"
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
-            fileName.text = fileDialog.fileUrl;
+            myConfig.fileUrl = fileDialog.fileUrl;
         }
     }
     ListView {

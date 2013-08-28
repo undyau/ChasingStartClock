@@ -25,7 +25,7 @@ bool CListUpdater::LoadRunners(QString& a_FileName)
     CIof3XmlContentHandler* handler = new CIof3XmlContentHandler(m_AllRunners);
     parser.setContentHandler(handler);
 
-    if(parser.parse(new QXmlInputSource(new QFile(QUrl(a_FileName).toLocalFile()))))
+    if(parser.parse(new QXmlInputSource(new QFile(a_FileName))))
         return true;
     else
         return false;
