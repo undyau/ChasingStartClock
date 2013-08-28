@@ -81,7 +81,7 @@ Rectangle {
             }
             TextField {
                 id: lookAheadText
-                validator: IntValidator {bottom: 5; top: 100;}
+                validator: IntValidator {bottom: 5; top: 10000;}
                 focus: true
                 text: myConfig.lookAhead
             }
@@ -94,15 +94,18 @@ Rectangle {
                 text: "Start file - IOF XML 3.0:"
                 font.pixelSize: 20
                 color: "white"
+                visible: fileName.text.length == 0
             }
             TextField {
                 id: fileName
                 focus: true
                 text: myConfig.file
+                visible: fileName.text.length == 0
             }
             ToolButton {
                id: openButton
                iconSource: "fileopen.png"
+               visible: fileName.text.length == 0
                onClicked: {
                    fileDialog.visible = true;
                }
@@ -113,12 +116,13 @@ Rectangle {
                 color: "white"
             }
             Button {
-               text: "Make it so"
-               onClicked: {
+               text: "Apply"
+               onClicked: {                   
                    myConfig.file = fileName.text;
                    myConfig.maxDisplay = maxStartersText.text;
                    myConfig.stale = staleText.text;
                    myConfig.lookAhead = lookAheadText.text;
+                   hideConfig();
                }
             }
         }
@@ -133,11 +137,7 @@ Rectangle {
            id: configOnButton
            iconSource: "monkey_on_32x32.png"
            onClicked: {
-               configOffButton.visible = true;
-               form.visible = true;
-               clockRect.visible = false;
-               listview.visible = false;
-               configOnButton.visible = false;
+               showConfig();
            }
            visible: true;
         }
@@ -145,11 +145,7 @@ Rectangle {
            id: configOffButton
            iconSource: "monkey_off_32x32.png"
            onClicked: {
-               clockRect.visible = true;
-               listview.visible = true;
-               configOnButton.visible = true;
-               configOffButton.visible = false;
-               form.visible = false;
+               hideConfig();
            }
            visible: false;
         }
@@ -238,5 +234,21 @@ Rectangle {
             var now = new Date();
             clock.text = Qt.formatTime(now,"hh:mm:ss");
         }
+    }
+    function hideConfig()
+    {
+        clockRect.visible = true;
+        listview.visible = true;
+        configOnButton.visible = true;
+        configOffButton.visible = false;
+        form.visible = false;
+    }
+    function showConfig()
+    {
+        configOffButton.visible = true;
+        form.visible = true;
+        clockRect.visible = false;
+        listview.visible = false;
+        configOnButton.visible = false;
     }
 }
