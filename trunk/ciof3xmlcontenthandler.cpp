@@ -62,8 +62,9 @@ void CIof3XmlContentHandler::AddPerson()
 
     if (local.isValid() && (m_FName.size() > 0 || m_SName.size() > 0))
     {
-            qDebug() << "Adding person";
         CRunner* runner = new CRunner(m_FName + " " + m_SName, local, m_Class);
+        while (m_AllRunners.find(local) != m_AllRunners.end())  // disambiguate common start times
+            local = local.addMSecs(1);
         m_AllRunners[local] = runner;
     }
     m_FName.clear();

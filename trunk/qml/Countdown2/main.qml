@@ -51,6 +51,7 @@ Rectangle {
                 id: staleText
                 validator: IntValidator {bottom: -360000; top: 0;}
                 focus: true
+                text: myConfig.stale
             }
             Label {
                 text: "seconds"
@@ -66,6 +67,7 @@ Rectangle {
                 id: maxStartersText
                 validator: IntValidator {bottom: 5; top: 100;}
                 focus: true
+                text: myConfig.maxDisplay
             }
             Label {
                 text: ""
@@ -73,17 +75,18 @@ Rectangle {
                 color: "white"
             }
             Label {
-                text: "Adjust start times by:"
+                text: "Look ahead by:"
                 font.pixelSize: 20
                 color: "white"
             }
             TextField {
-                id: adjustStartsHours
-                validator: IntValidator {bottom: -2400; top: 2400;}
+                id: lookAheadText
+                validator: IntValidator {bottom: 5; top: 100;}
                 focus: true
+                text: myConfig.lookAhead
             }
             Label {
-                text: "hours"
+                text: "minutes"
                 font.pixelSize: 20
                 color: "white"
             }
@@ -95,6 +98,7 @@ Rectangle {
             TextField {
                 id: fileName
                 focus: true
+                text: myConfig.file
             }
             ToolButton {
                id: openButton
@@ -111,7 +115,10 @@ Rectangle {
             Button {
                text: "Make it so"
                onClicked: {
-                   console.log("Clicked OK");
+                   myConfig.file = fileName.text;
+                   myConfig.maxDisplay = maxStartersText.text;
+                   myConfig.stale = staleText.text;
+                   myConfig.lookAhead = lookAheadText.text;
                }
             }
         }
@@ -152,13 +159,8 @@ Rectangle {
         title: "Choose the Start List file (in IOF 3.0 XML format)"
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
-            console.log("You chose: " + fileDialog.fileUrls)
             fileName.text = fileDialog.fileUrl;
         }
-        onRejected: {
-            console.log("Canceled")
-        }
-       // Component.onCompleted: visible = true
     }
     ListView {
         id: listview

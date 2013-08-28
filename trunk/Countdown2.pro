@@ -17,7 +17,8 @@ QT += xml
 SOURCES += main.cpp \
     crunner.cpp \
     clistupdater.cpp \
-    ciof3xmlcontenthandler.cpp
+    ciof3xmlcontenthandler.cpp \
+    cconfiguration.cpp
 
 # Installation path
 # target.path =
@@ -29,4 +30,5 @@ qtcAddDeployment()
 HEADERS += \
     crunner.h \
     clistupdater.h \
-    ciof3xmlcontenthandler.h
+    ciof3xmlcontenthandler.h \
+    cconfiguration.h

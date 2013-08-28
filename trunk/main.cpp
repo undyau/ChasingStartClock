@@ -6,6 +6,7 @@
 #include <QList>
 #include <QTimer>
 #include "clistupdater.h"
+#include "cconfiguration.h"
 #include <QTime>
 
 
@@ -17,7 +18,8 @@ int main(int argc, char *argv[])
     QtQuick2ApplicationViewer viewer;
     QQmlContext *ctxt = viewer.rootContext();
 
-    CListUpdater updater(ctxt, "C:\\Users\\a.simpson\\Desktop\\StartList.xml");
+    CConfiguration config;
+    CListUpdater updater(ctxt, &config);
 
     viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
