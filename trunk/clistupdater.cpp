@@ -29,7 +29,7 @@ CListUpdater::~CListUpdater()
 void CListUpdater::FakeStartList()
 {
     QStringList fnames = QStringList() << "Andy" << "Cathy" << "Bill" << "Juergen" << "Eoin" << "Iain" << "Gill" << "Michael" << "Bert" << "Rob" << "Moose" << "Linda" << "Aldo" << "Stix";
-    QStringList mnames = QStringList() << "Faker" << "'the dud'" << "'Princess'" << "Ace" << "Frankie" << "de" << "King" << "NotMyRealName" << "Fake";
+    QStringList mnames = QStringList() << "Faker" << "'the dud'" << "'Princess'" << "Ace" << "'leech'" << "de" << "King" << "Red" << "Hustler";
     QStringList snames = QStringList() << "Smith" << "Jones" << "Black" << "White" << "Murphy" << "Kirk" << "Tippett" << "Goodes" << "O'Loughlin" << "Barry" << "Rampe" << "Bolton" << "O'Keefe" << "Kennedy";
     QStringList oclasses = QStringList() << "M10" << "W10" << "W65A" << "M55AS" << "M65 Short but tricky" << "W53-54";
     QDateTime base = QDateTime::currentDateTime();
@@ -38,7 +38,7 @@ void CListUpdater::FakeStartList()
         base = base.addSecs(qrand() % 60);
         base = base.addMSecs(i);
         QString fname = fnames.at(qrand() % fnames.size());
-        QString mname = qrand() % 4 > 2 ? " " + mnames.at(qrand() % mnames.size()) : "";
+        QString mname = qrand() % 5 > 3 ? " " + mnames.at(qrand() % mnames.size()) : "";
         QString sname = snames.at(qrand() % snames.size());
         QString oclass = oclasses.at(qrand() % oclasses.size());
         CRunner* runner = new CRunner(fname + mname + " " + sname, base, oclass);

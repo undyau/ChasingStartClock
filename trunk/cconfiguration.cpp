@@ -1,11 +1,36 @@
 #include "cconfiguration.h"
 #include <QUrl>
+#include <QSettings>
+#include <QDebug>
 
 CConfiguration::CConfiguration(const QString &a_File, int a_LookAhead, int a_Stale,
                                int a_MaxDisplay, QObject *parent):
     m_File(a_File), QObject(parent), m_Stale(a_Stale), m_MaxDisplay(a_MaxDisplay),
     m_LookAhead(a_LookAhead)
 {
+    QSettings settings(QSettings::IniFormat,  QSettings::UserScope, "undy", "ChasingStartClock");
+    settings.beginGroup("Configuration");
+    m_File = settings.value("StartFile", a_File).toString();
+    if (m_File.isEmpty())
+        m_File = a_File;
+    m_Stale = settings.value("Stale", a_Stale).toInt();
+    m_MaxDisplay = settings.value("MaxDisplay", a_MaxDisplay).toInt();
+    m_LookAhead = settings.value("LookAhead", a_LookAhead).toInt();
+    settings.endGroup();
+}
+
+CConfiguration::~CConfiguration()
+{
+    qDebug() << "In destructor";
+    QSettings settings(QSettings::IniFormat,  QSettings::UserScope, "undy", "ChasingStartClock");
+    settings.beginGroup("Configuration");
+    settings.setProperty("StartFile", m_File);
+    settings.setProperty("Stale", m_Stale);
+    settings.setProperty("MaxDisplay", m_MaxDisplay);
+    settings.setProperty("LookAhead", m_LookAhead);
+    settings.endGroup();
+    qDebug() << "Ended destructor";
+
 }
 
 void CConfiguration::setFile(const QString &a)

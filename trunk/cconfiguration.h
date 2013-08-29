@@ -14,6 +14,7 @@ class CConfiguration : public QObject
 public:
     explicit CConfiguration(const QString& a_File = "", int a_LookAhead = 10,
                             int a_Stale = -3, int a_MaxDisplay = 10, QObject *parent = 0);
+    ~CConfiguration();
     void setFile(const QString &a);
     void setFileUrl(const QString &a);
     void setLookAhead(int a);
@@ -24,6 +25,7 @@ public:
     int lookAhead() const { return m_LookAhead; }
     int stale() const { return m_Stale; }
     int maxDisplay() const { return m_MaxDisplay; }
+
 signals:
     void fileChanged();
     void fileUrlChanged();
