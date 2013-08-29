@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
     CConfiguration config("FAKE");
     CListUpdater updater(ctxt, &config);
 
-    viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
+    //viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
+    viewer.setMainQmlFile(QStringLiteral("qrc:/qml/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
    // viewer.showFullScreen();
     viewer.showExpanded();

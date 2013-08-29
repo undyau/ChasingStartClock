@@ -32,3 +32,6 @@ HEADERS += \
     clistupdater.h \
     ciof3xmlcontenthandler.h \
     cconfiguration.h
+
+RESOURCES += \
+    resource.qrc

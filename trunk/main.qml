@@ -102,7 +102,7 @@ Rectangle {
             }
             ToolButton {
                id: openButton
-               iconSource: "fileopen.png"
+               iconSource: "qrc:/icons/fileopen.png"
                onClicked: {
                    fileDialog.visible = true;
                }
@@ -132,7 +132,7 @@ Rectangle {
         height: 40
         ToolButton {
            id: configOnButton
-           iconSource: "monkey_on_32x32.png"
+           iconSource: "qrc:/icons/monkey_on_32x32.png"
            onClicked: {
                showConfig();
            }
@@ -140,7 +140,7 @@ Rectangle {
         }
         ToolButton {
            id: configOffButton
-           iconSource: "monkey_off_32x32.png"
+           iconSource: "qrc:/icons/monkey_off_32x32.png"
            onClicked: {
                hideConfig();
            }

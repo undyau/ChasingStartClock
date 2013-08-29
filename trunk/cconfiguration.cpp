@@ -21,7 +21,7 @@ CConfiguration::CConfiguration(const QString &a_File, int a_LookAhead, int a_Sta
 
 CConfiguration::~CConfiguration()
 {
-    qDebug() << "In destructor";
+    //qDebug() << "In destructor";
     QSettings settings(QSettings::IniFormat,  QSettings::UserScope, "undy", "ChasingStartClock");
     settings.beginGroup("Configuration");
     settings.setProperty("StartFile", m_File);
@@ -29,7 +29,7 @@ CConfiguration::~CConfiguration()
     settings.setProperty("MaxDisplay", m_MaxDisplay);
     settings.setProperty("LookAhead", m_LookAhead);
     settings.endGroup();
-    qDebug() << "Ended destructor";
+   // qDebug() << "Ended destructor";
 
 }
 
