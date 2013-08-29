@@ -18,7 +18,7 @@ int main(int argc, char *argv[])
     QtQuick2ApplicationViewer viewer;
     QQmlContext *ctxt = viewer.rootContext();
 
-    CConfiguration config;
+    CConfiguration config("FAKE");
     CListUpdater updater(ctxt, &config);
 
     viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));

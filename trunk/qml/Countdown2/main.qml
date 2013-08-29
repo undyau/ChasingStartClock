@@ -59,7 +59,7 @@ Rectangle {
                 color: "white"
             }
             Label {
-                text: "Maximum starters:"
+                text: "Maximum starters shown:"
                 font.pixelSize: 20
                 color: "white"
             }
@@ -94,18 +94,15 @@ Rectangle {
                 text: "Start file - IOF XML 3.0:"
                 font.pixelSize: 20
                 color: "white"
-                visible: fileName.text.length == 0
             }
             TextField {
                 id: fileName
                 focus: true
                 text: myConfig.file
-                visible: fileName.text.length == 0
             }
             ToolButton {
                id: openButton
                iconSource: "fileopen.png"
-               visible: fileName.text.length == 0
                onClicked: {
                    fileDialog.visible = true;
                }
@@ -122,7 +119,7 @@ Rectangle {
                    myConfig.maxDisplay = maxStartersText.text;
                    myConfig.stale = staleText.text;
                    myConfig.lookAhead = lookAheadText.text;
-                   hideConfig();
+                   hideConfig();                   
                }
             }
         }
@@ -189,7 +186,7 @@ Rectangle {
                        id: name
                        text: modelData.name
                        color: modelData.color
-                       font.pixelSize: entry.width *.08
+                       font.pixelSize: Math.min(entry.width *.08, entry.height *.8)
                        verticalAlignment: Text.AlignTop
                    }
                }
@@ -204,7 +201,7 @@ Rectangle {
                        id: timeleft
                        text:  modelData.timeleft
                        color: modelData.color
-                       font.pixelSize: entry.width *.08
+                       font.pixelSize: Math.min(entry.width *.08, entry.height *.8)
                        verticalAlignment: Text.AlignTop
                    }
                }
@@ -219,7 +216,7 @@ Rectangle {
                    id: detail
                    text:  modelData.oclass + ' ' + modelData.start
                    color: modelData.color
-                   font.pixelSize: parent.width *.06
+                   font.pixelSize: Math.min(entry.width *.06, entry.height *.6)
                    verticalAlignment: Text.AlignTop
                }
             }
@@ -251,4 +248,5 @@ Rectangle {
         listview.visible = false;
         configOnButton.visible = false;
     }
+
 }

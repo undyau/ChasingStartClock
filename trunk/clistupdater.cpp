@@ -17,19 +17,34 @@ CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, QO
     connect(m_Config, SIGNAL(maxDisplayChanged()), this, SLOT(Update()));
 }
 
-/*void CListUpdater::FakeStartList()
+CListUpdater::~CListUpdater()
 {
+    for (QMap<QDateTime, CRunner*>::Iterator i = m_AllRunners.begin(); i!= m_AllRunners.end(); i++)
+       delete i.value();
+
+    foreach (QObject* runner, m_OldRunners)
+        delete runner;
+}
+
+void CListUpdater::FakeStartList()
+{
+    QStringList fnames = QStringList() << "Andy" << "Cathy" << "Bill" << "Juergen" << "Eoin" << "Iain" << "Gill" << "Michael" << "Bert" << "Rob" << "Moose" << "Linda" << "Aldo" << "Stix";
+    QStringList mnames = QStringList() << "Faker" << "'the dud'" << "'Princess'" << "Ace" << "Frankie" << "de" << "King" << "NotMyRealName" << "Fake";
+    QStringList snames = QStringList() << "Smith" << "Jones" << "Black" << "White" << "Murphy" << "Kirk" << "Tippett" << "Goodes" << "O'Loughlin" << "Barry" << "Rampe" << "Bolton" << "O'Keefe" << "Kennedy";
+    QStringList oclasses = QStringList() << "M10" << "W10" << "W65A" << "M55AS" << "M65 Short but tricky" << "W53-54";
+    QDateTime base = QDateTime::currentDateTime();
     for (int i = 0; i < 100; i++)
     {
-    QDateTime date = QDateTime::fromString(m_Start, "yyyy-MM-ddTHH:mm:ss");
-
-    date.setTimeSpec(Qt::UTC);
-    QDateTime local = date.toLocalTime();
-
-    if (local.isValid() && (m_FName.size() > 0 || m_SName.size() > 0))
-    {
-        CRunner* runner = new CRunner(m_FName + " " + m_SName, local, m_Class);
-}*/
+        base = base.addSecs(qrand() % 60);
+        base = base.addMSecs(i);
+        QString fname = fnames.at(qrand() % fnames.size());
+        QString mname = qrand() % 4 > 2 ? " " + mnames.at(qrand() % mnames.size()) : "";
+        QString sname = snames.at(qrand() % snames.size());
+        QString oclass = oclasses.at(qrand() % oclasses.size());
+        CRunner* runner = new CRunner(fname + mname + " " + sname, base, oclass);
+        m_AllRunners[base] = runner;
+    }
+}
 
 bool CListUpdater::LoadRunners(QString& a_FileName)
 {
@@ -37,7 +52,8 @@ bool CListUpdater::LoadRunners(QString& a_FileName)
         return false;
     if (a_FileName.compare("Fake", Qt::CaseInsensitive) == 0)
     {
-        //FakeStartList();
+        FakeStartList();
+        return true;
     }
     else
     {
@@ -71,7 +87,8 @@ void CListUpdater::Reload()
 
     m_DisplayList.clear();
     for (QMap<QDateTime, CRunner*>::Iterator i = m_AllRunners.begin(); i!= m_AllRunners.end(); i++)
-        delete i.value();
+        m_OldRunners.push_back(i.value());
+
     m_AllRunners.clear();
 
     if (LoadRunners(m_Config->file()))
@@ -104,7 +121,5 @@ void CListUpdater::GetDisplayList(QList<QObject*>& a_List)
 
 void CListUpdater::UpdateDisplayList()
 {
-    qDebug() << "At 1, m_DisplayList has" << m_DisplayList.size();
     m_Context->setContextProperty("myModel", QVariant::fromValue(m_DisplayList));
-    qDebug() << "At 2";
 }
