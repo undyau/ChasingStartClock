@@ -5,6 +5,6 @@
         <file>monkey_on_32x32.png</file>
     </qresource>
     <qresource prefix="/qml">
-        <file>main.qml</file>
+        <file>qml/Countdown2/main.qml</file>
     </qresource>
 </RCC>

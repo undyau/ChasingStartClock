@@ -8,6 +8,7 @@
 #include "clistupdater.h"
 #include "cconfiguration.h"
 #include <QTime>
+#include <QUrl>
 
 
 
@@ -22,7 +23,10 @@ int main(int argc, char *argv[])
     CListUpdater updater(ctxt, &config);
 
     //viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
-    viewer.setMainQmlFile(QStringLiteral("qrc:/qml/main.qml"));
+   // QUrl url("qrc:qml/Countdown2/main.qml");
+
+    //viewer.setMainQmlFile(QUrl("qrc:qml/Countdown2/main.qml");
+    viewer.setSource(QUrl("qrc:qml/qml/Countdown2/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
    // viewer.showFullScreen();
     viewer.showExpanded();
