@@ -6,6 +6,12 @@ DEPLOYMENTFOLDERS = folder_01
 # Additional import path used to resolve QML modules in Creator's code model
 QML_IMPORT_PATH =
 
+VERSION = 1.0.0.0
+QMAKE_TARGET_COMPANY = "Andy Simpson"
+QMAKE_TARGET_PRODUCT = ChasingStartClock
+QMAKE_TARGET_DESCRIPTION = "Start Clock for Orienteering"
+QMAKE_TARGET_COPYRIGHT = "Copyright © 2013 Andy Simpson"
+
 QT += xml
 
 # If your application uses the Qt Mobility libraries, uncomment the following
