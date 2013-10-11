@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ChasingStartClock"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.1"
 #define MyAppPublisher "undy"
 #define MyAppURL "https://sourceforge.net/projects/chasingstartclock/"
 #define MyAppExeName "Countdown2.exe"
@@ -22,9 +22,9 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-LicenseFile=C:\Users\OW\Documents\Projects\ChasingStartClock\Windows Installer\gpl.txt
-InfoBeforeFile=C:\Users\OW\Documents\Projects\ChasingStartClock\Windows Installer\readme.txt
-OutputDir=C:\Users\OW\Documents\Projects\ChasingStartClock\Windows Installer
+LicenseFile=gpl.txt
+InfoBeforeFile=readme.txt
+OutputDir=.
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -36,8 +36,8 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\OW\Documents\Projects\ChasingStartClock\Windows Installer\Countdown2.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\OW\Documents\Projects\ChasingStartClock\Windows Installer\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Countdown2.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "*"; Excludes: "AAReadme.txt,*.iss,setup.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]

@@ -24,10 +24,10 @@ CConfiguration::~CConfiguration()
     //qDebug() << "In destructor";
     QSettings settings(QSettings::IniFormat,  QSettings::UserScope, "undy", "ChasingStartClock");
     settings.beginGroup("Configuration");
-    settings.setProperty("StartFile", m_File);
-    settings.setProperty("Stale", m_Stale);
-    settings.setProperty("MaxDisplay", m_MaxDisplay);
-    settings.setProperty("LookAhead", m_LookAhead);
+    settings.setValue("StartFile", m_File);
+    settings.setValue("Stale", m_Stale);
+    settings.setValue("MaxDisplay", m_MaxDisplay);
+    settings.setValue("LookAhead", m_LookAhead);
     settings.endGroup();
    // qDebug() << "Ended destructor";
 

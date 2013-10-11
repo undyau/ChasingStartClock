@@ -14,7 +14,7 @@ CIof3XmlContentHandler::~CIof3XmlContentHandler()
 
 }
 
-bool CIof3XmlContentHandler::endElement(const QString &namespaceURI, const QString &localName, const QString &qName)
+bool CIof3XmlContentHandler::endElement(const QString& , const QString &localName, const QString &)
 {
     if (localName != m_Elements.last() && m_Elements.size() > 0)
         qDebug() << "ending element" << localName << "expected" << m_Elements.last();
@@ -41,8 +41,8 @@ bool CIof3XmlContentHandler::characters(const QString &ch)
     return true;
 }
 
-bool CIof3XmlContentHandler::startElement(const QString & namespaceURI, const QString & localName,
-                const QString & qName, const QXmlAttributes & atts )
+bool CIof3XmlContentHandler::startElement(const QString & , const QString & localName,
+                const QString &, const QXmlAttributes &  )
 {
     m_Elements.append(localName);
     return true;

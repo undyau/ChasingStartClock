@@ -16,6 +16,9 @@ int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
+    app.setOrganizationName("undy");
+    app.setApplicationName("ChasingStartClock");
+
     QtQuick2ApplicationViewer viewer;
     QQmlContext *ctxt = viewer.rootContext();
 

@@ -38,6 +38,7 @@ public slots:
 private:
     QString m_File;
     QString m_FileUrl;
+    QString m_IniFileName;
     int m_Stale;
     int m_MaxDisplay;
     int m_LookAhead;
