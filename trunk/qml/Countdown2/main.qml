@@ -122,6 +122,11 @@ Rectangle {
                    hideConfig();                   
                }
             }
+            Label {
+                text: myAlert.message
+                font.pixelSize: 12
+                color: "red"
+            }
         }
     }
 

@@ -5,11 +5,12 @@
 #include <QVector>
 
 class CRunner;
+class CAlert;
 
 class CIof3XmlContentHandler : public QXmlDefaultHandler
 {
 public:
-    CIof3XmlContentHandler(QMap<QDateTime, CRunner*>& a_AllRunners);
+    CIof3XmlContentHandler(QMap<QDateTime, CRunner*>& a_AllRunners, CAlert* a_Alerter);
     ~CIof3XmlContentHandler();
     bool endElement ( const QString & namespaceURI, const QString & localName, const QString & qName );
     bool characters ( const QString & ch );
@@ -24,6 +25,9 @@ private:
     QString m_SName;
     QString m_Class;
     QString m_Start;
+    CAlert* m_Alerter;
+
+    void ValidateDate(QString a);
 };
 
 #endif // CIOF3XMLCONTENTHANDLER_H

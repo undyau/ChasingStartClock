@@ -9,6 +9,7 @@
 #include "cconfiguration.h"
 #include <QTime>
 #include <QUrl>
+#include "calert.h"
 
 
 
@@ -23,7 +24,8 @@ int main(int argc, char *argv[])
     QQmlContext *ctxt = viewer.rootContext();
 
     CConfiguration config("FAKE");
-    CListUpdater updater(ctxt, &config);
+    CAlert alerter;
+    CListUpdater updater(ctxt, &config, &alerter);
 
     //viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
    // QUrl url("qrc:qml/Countdown2/main.qml");

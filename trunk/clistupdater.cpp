@@ -4,11 +4,13 @@
 #include <QtXml/QXmlSimpleReader>
 #include "ciof3xmlcontenthandler.h"
 #include "cconfiguration.h"
+#include "calert.h"
 
-CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, QObject *parent) :
-    QObject(parent), m_Timer(this), m_Context(a_Context), m_Config(a_Config)
+CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, CAlert* a_Alert, QObject *parent) :
+    QObject(parent), m_Timer(this), m_Context(a_Context), m_Config(a_Config), m_Alert(a_Alert)
 {
     m_Context->setContextProperty("myConfig", m_Config);
+    m_Context->setContextProperty("myAlert", m_Alert);
     m_Context->setContextProperty("myUpdater", this);
     Reload();
     connect(m_Config, SIGNAL(fileChanged()), this, SLOT(Reload()));
@@ -58,7 +60,7 @@ bool CListUpdater::LoadRunners(QString& a_FileName)
     else
     {
         QXmlSimpleReader parser;
-        CIof3XmlContentHandler* handler = new CIof3XmlContentHandler(m_AllRunners);
+        CIof3XmlContentHandler* handler = new CIof3XmlContentHandler(m_AllRunners, m_Alert);
         parser.setContentHandler(handler);
 
         if(parser.parse(new QXmlInputSource(new QFile(a_FileName))))

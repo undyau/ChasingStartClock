@@ -2,9 +2,10 @@
 #include "crunner.h"
 #include <QTime>
 #include <QDebug>
+#include "calert.h"
 
-CIof3XmlContentHandler::CIof3XmlContentHandler(QMap<QDateTime, CRunner*>& a_AllRunners):
-    QXmlDefaultHandler(),m_AllRunners(a_AllRunners)
+CIof3XmlContentHandler::CIof3XmlContentHandler(QMap<QDateTime, CRunner*>& a_AllRunners, CAlert* a_Alerter):
+    QXmlDefaultHandler(),m_AllRunners(a_AllRunners), m_Alerter(a_Alerter)
 {
 }
 
@@ -38,6 +39,10 @@ bool CIof3XmlContentHandler::characters(const QString &ch)
         m_FName = ch;
     if (m_Elements.size() > 2 && m_Elements.last() == "StartTime" && m_Elements[m_Elements.size()-2] == "Start" && m_Elements[m_Elements.size()-3] == "PersonStart")
         m_Start = ch;
+    if (m_Elements.size() > 2 && m_Elements.last() == "Date" && m_Elements[m_Elements.size()-2] == "StartTime" && m_Elements[m_Elements.size()-3] == "Event")
+        ValidateDate(ch);
+
+
     return true;
 }
 
@@ -70,4 +75,13 @@ void CIof3XmlContentHandler::AddPerson()
     m_FName.clear();
     m_SName.clear();
     m_Start.clear();
-};
+}
+
+void CIof3XmlContentHandler::ValidateDate(QString a)
+{
+    QDate eventDate = QDate::fromString(a, "yyyy-MM-dd");
+  QDate today = QDate::currentDate();
+  qDebug() << eventDate << today << a;
+  if (eventDate != today)
+      m_Alerter->setMessage("Start list is for another day - " + a);
+}

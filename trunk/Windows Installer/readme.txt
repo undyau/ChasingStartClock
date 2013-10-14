@@ -1,7 +1,10 @@
-Latest Release: 1.1.0 11th October 2013
+Latest Release: 1.2.0 14th October 2013
 
 
 History
+
+1.2.0 11th October 2013
+New: Show warning in config if startlist is from another day.
 
 1.1.0 11th October 2013
 Fix: Settings were not persistent.
