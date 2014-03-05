@@ -1,7 +1,10 @@
-Latest Release: 1.2.0 14th October 2013
+Latest Release: 1.3.0 5th March 2014
 
 
 History
+1.3.0 5th March 2014
+Fix: Import of some ISO 8601 date/time formats lost the time-zone info.
+(This affected imports from OE in particular).
 
 1.2.0 11th October 2013
 New: Show warning in config if startlist is from another day.

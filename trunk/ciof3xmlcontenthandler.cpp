@@ -57,14 +57,25 @@ void CIof3XmlContentHandler::AddPerson()
 {
     if (m_Start.size() < 19)
         return; // unknown time format
-    else if (m_Start.size() > 19)  // throw away tz info - QT can't handle it ?
-        m_Start = m_Start.left(19);
 
-    QDateTime date = QDateTime::fromString(m_Start, "yyyy-MM-ddTHH:mm:ss");
+    int tpos, pos(-1),hours(0),mins(0);
+    QDateTime date;
+    tpos = m_Start.indexOf('T');
+    if (( pos = m_Start.indexOf('+')) > 0 && m_Start.size() >= pos + 6)
+        {
+        hours = -m_Start.mid(pos+1,2).toInt();
+        mins = -m_Start.mid(pos+3,2).toInt();
+        }
+    else if (( pos = m_Start.indexOf('-', tpos)) > 0 && m_Start.size() >= pos + 6)
+        {
+        hours = m_Start.mid(pos+1,2).toInt();
+        mins = m_Start.mid(pos+3,2).toInt();
+        }
 
+    date = QDateTime::fromString(m_Start.left(19), "yyyy-MM-ddTHH:mm:ss");
+    date = date.addSecs(((hours*60)+mins)*60);
     date.setTimeSpec(Qt::UTC);
     QDateTime local = date.toLocalTime();
-
     if (local.isValid() && (m_FName.size() > 0 || m_SName.size() > 0))
     {
         CRunner* runner = new CRunner(m_FName + " " + m_SName, local, m_Class);
@@ -79,7 +90,7 @@ void CIof3XmlContentHandler::AddPerson()
 
 void CIof3XmlContentHandler::ValidateDate(QString a)
 {
-    QDate eventDate = QDate::fromString(a, "yyyy-MM-dd");
+  QDate eventDate = QDate::fromString(a, "yyyy-MM-dd");
   QDate today = QDate::currentDate();
   qDebug() << eventDate << today << a;
   if (eventDate != today)
