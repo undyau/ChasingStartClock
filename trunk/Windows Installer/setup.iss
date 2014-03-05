@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "ChasingStartClock"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.3"
 #define MyAppPublisher "undy"
 #define MyAppURL "https://sourceforge.net/projects/chasingstartclock/"
 #define MyAppExeName "Countdown2.exe"
