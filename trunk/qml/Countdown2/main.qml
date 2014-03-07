@@ -112,6 +112,38 @@ Rectangle {
                 font.pixelSize: 12
                 color: "white"
             }
+            Label {
+                text: ""
+                font.pixelSize: 12
+                color: "white"
+            }
+            Label {
+                text: ""
+                font.pixelSize: 12
+                color: "white"
+            }
+            Label {
+                text: "Sound file to play at zero:"
+                font.pixelSize: 20
+                color: "white"
+            }
+            TextField {
+                id: startSoundFileName
+                focus: true
+                text: myConfig.startSoundFile
+            }
+            ToolButton {
+               id: openStartSoundFileButton
+               iconSource: "qrc:/icons/fileopen.png"
+               onClicked: {
+                   startSoundFileDialog.visible = true;
+               }
+            }
+            Label {
+                text: "(Leave blank for no sound at zero)"
+                font.pixelSize: 12
+                color: "white"
+            }
             Button {
                text: "Apply"
                onClicked: {                   
@@ -160,6 +192,14 @@ Rectangle {
         nameFilters: [ "XML files (*.xml)", "All files (*)" ]
         onAccepted: {
             myConfig.fileUrl = fileDialog.fileUrl;
+        }
+    }
+    FileDialog {
+        id: startSoundFileDialog
+        title: "Choose the sound file to play"
+        nameFilters: [ "WAV files (*.wav)","All files (*)" ]
+        onAccepted: {
+            myConfig.startSoundFile = startSoundFileDialog.fileUrl;
         }
     }
     ListView {

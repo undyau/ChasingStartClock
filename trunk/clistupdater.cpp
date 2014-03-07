@@ -5,6 +5,8 @@
 #include "ciof3xmlcontenthandler.h"
 #include "cconfiguration.h"
 #include "calert.h"
+#include <QThreadPool>
+#include "cplaysound.h"
 
 CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, CAlert* a_Alert, QObject *parent) :
     QObject(parent), m_Timer(this), m_Context(a_Context), m_Config(a_Config), m_Alert(a_Alert)
@@ -88,6 +90,7 @@ void CListUpdater::Reload()
     m_Timer.stop();
 
     m_DisplayList.clear();
+    m_PlayedStartSounds.clear();
     for (QMap<QDateTime, CRunner*>::Iterator i = m_AllRunners.begin(); i!= m_AllRunners.end(); i++)
         m_OldRunners.push_back(i.value());
 
@@ -118,10 +121,20 @@ void CListUpdater::GetDisplayList(QList<QObject*>& a_List)
                 i.value()->timeleft().toInt() <= m_Config->lookAhead() *60 &&
                 a_List.size() < m_Config->maxDisplay())
             a_List.append(i.value());
+        if (i.value()->timeleft().toInt() == 0 && m_Config->playStartSound() && !m_PlayedStartSounds.contains(i.value()))
+        {
+            m_PlayedStartSounds.push_back(i.value());
+            PlaySound();
+        }
     }
 }
 
 void CListUpdater::UpdateDisplayList()
 {
     m_Context->setContextProperty("myModel", QVariant::fromValue(m_DisplayList));
+}
+
+void CListUpdater::PlaySound()
+{
+    QThreadPool::globalInstance()->start(new CPlaySound(m_Config->startSoundFile()));
 }

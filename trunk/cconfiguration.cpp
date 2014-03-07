@@ -50,6 +50,14 @@ void CConfiguration::setFileUrl(const QString &a)
     setFile(QUrl(a).toLocalFile());
 }
 
+void CConfiguration::setStartSoundFile(const QString &a)
+{
+    if (a != m_StartSoundFileName) {
+        m_StartSoundFileName = a;
+        emit startSoundFileChanged();
+    }
+}
+
 void CConfiguration::setLookAhead(int a)
 {
     if (a != m_LookAhead) {
@@ -73,7 +81,6 @@ void CConfiguration::setMaxDisplay(int a)
         emit maxDisplayChanged();
     }
 }
-
 
 
 

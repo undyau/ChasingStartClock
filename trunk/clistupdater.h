@@ -21,6 +21,7 @@ private:
     QList<QObject*> m_DisplayList;
     QMap<QDateTime, CRunner*> m_AllRunners;
     QList<QObject*> m_OldRunners;
+    QList<QObject*> m_PlayedStartSounds;
     QTimer m_Timer;
     CConfiguration* m_Config;
     CAlert* m_Alert;
@@ -29,6 +30,7 @@ private:
     bool LoadRunners(QString &a_FileName);
     void GetDisplayList(QList<QObject *> &a_List);
     void FakeStartList();
+    void PlaySound();
 
 signals:
     

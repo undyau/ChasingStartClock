@@ -27,13 +27,9 @@ int main(int argc, char *argv[])
     CAlert alerter;
     CListUpdater updater(ctxt, &config, &alerter);
 
-    //viewer.setMainQmlFile(QStringLiteral("qml/Countdown2/main.qml"));
-   // QUrl url("qrc:qml/Countdown2/main.qml");
-
-    //viewer.setMainQmlFile(QUrl("qrc:qml/Countdown2/main.qml");
     viewer.setSource(QUrl("qrc:qml/qml/Countdown2/main.qml"));
     viewer.setResizeMode(QQuickView::SizeRootObjectToView);
-   // viewer.showFullScreen();
+
     viewer.showExpanded();
 
 

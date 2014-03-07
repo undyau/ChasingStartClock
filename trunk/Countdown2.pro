@@ -12,7 +12,7 @@ QMAKE_TARGET_PRODUCT = ChasingStartClock
 QMAKE_TARGET_DESCRIPTION = "Start Clock for Orienteering"
 QMAKE_TARGET_COPYRIGHT = "Copyright © 2014 Andy Simpson"
 
-QT += xml
+QT += xml multimedia
 
 # If your application uses the Qt Mobility libraries, uncomment the following
 # lines and add the respective components to the MOBILITY variable.
@@ -25,7 +25,8 @@ SOURCES += main.cpp \
     clistupdater.cpp \
     ciof3xmlcontenthandler.cpp \
     cconfiguration.cpp \
-    calert.cpp
+    calert.cpp \
+    cplaysound.cpp
 
 # Installation path
 # target.path =
@@ -39,7 +40,8 @@ HEADERS += \
     clistupdater.h \
     ciof3xmlcontenthandler.h \
     cconfiguration.h \
-    calert.h
+    calert.h \
+    cplaysound.h
 
 RESOURCES += \
     resource.qrc
