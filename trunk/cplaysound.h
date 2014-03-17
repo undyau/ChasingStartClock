@@ -3,6 +3,7 @@
 
 #include <QRunnable>
 #include <QString>
+#include <QSound>
 
 class CPlaySound : public QRunnable
 {
@@ -12,6 +13,7 @@ public:
     
 private:
     QString m_SoundFile;
+    QSound m_Sound;
     
 };
 

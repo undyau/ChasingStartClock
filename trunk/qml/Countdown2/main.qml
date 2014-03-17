@@ -151,6 +151,7 @@ Rectangle {
                    myConfig.maxDisplay = maxStartersText.text;
                    myConfig.stale = staleText.text;
                    myConfig.lookAhead = lookAheadText.text;
+                   myConfig.startSoundFile = startSoundFileName.text;
                    hideConfig();                   
                }
             }
@@ -199,7 +200,8 @@ Rectangle {
         title: "Choose the sound file to play"
         nameFilters: [ "WAV files (*.wav)","All files (*)" ]
         onAccepted: {
-            myConfig.startSoundFile = startSoundFileDialog.fileUrl;
+           // startSoundFileName = startSoundFileDialog.fileUrl.toLocalFile;
+            myConfig.startSoundFile = startSoundFileDialog.fileUrl.toLocalFile;
         }
     }
     ListView {

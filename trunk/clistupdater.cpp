@@ -136,5 +136,6 @@ void CListUpdater::UpdateDisplayList()
 
 void CListUpdater::PlaySound()
 {
-    QThreadPool::globalInstance()->start(new CPlaySound(m_Config->startSoundFile()));
+    CPlaySound* player = new CPlaySound(m_Config->startSoundFile());
+    QThreadPool::globalInstance()->start(player);
 }

@@ -16,6 +16,7 @@ CConfiguration::CConfiguration(const QString &a_File, int a_LookAhead, int a_Sta
     m_Stale = settings.value("Stale", a_Stale).toInt();
     m_MaxDisplay = settings.value("MaxDisplay", a_MaxDisplay).toInt();
     m_LookAhead = settings.value("LookAhead", a_LookAhead).toInt();
+    m_StartSoundFileName = settings.value("StartSoundFile").toString();
     settings.endGroup();
 }
 
@@ -28,6 +29,7 @@ CConfiguration::~CConfiguration()
     settings.setValue("Stale", m_Stale);
     settings.setValue("MaxDisplay", m_MaxDisplay);
     settings.setValue("LookAhead", m_LookAhead);
+    settings.setValue("StartSoundFile", m_StartSoundFileName);
     settings.endGroup();
    // qDebug() << "Ended destructor";
 
