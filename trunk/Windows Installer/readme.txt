@@ -2,7 +2,10 @@ Latest Release: 1.4.0 18th March 2014
 
 
 History
-1.4.0 5th March 2014
+1.4.0  19th March 2014
+Fix: Qt5MultiMedia.dll missing from setup.
+
+1.4.0 18th March 2014
 New: Add support for playing a sound file at time 0
      for each competitor.
 
