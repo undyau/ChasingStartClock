@@ -1,7 +1,11 @@
-Latest Release: 1.3.0 5th March 2014
+Latest Release: 1.4.0 18th March 2014
 
 
 History
+1.4.0 5th March 2014
+New: Add support for playing a sound file at time 0
+     for each competitor.
+
 1.3.0 5th March 2014
 Fix: Import of some ISO 8601 date/time formats lost the time-zone info.
 (This affected imports from OE in particular).

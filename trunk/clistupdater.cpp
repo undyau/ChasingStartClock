@@ -6,7 +6,7 @@
 #include "cconfiguration.h"
 #include "calert.h"
 #include <QThreadPool>
-#include "cplaysound.h"
+#include <QSound>
 
 CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, CAlert* a_Alert, QObject *parent) :
     QObject(parent), m_Timer(this), m_Context(a_Context), m_Config(a_Config), m_Alert(a_Alert)
@@ -124,7 +124,7 @@ void CListUpdater::GetDisplayList(QList<QObject*>& a_List)
         if (i.value()->timeleft().toInt() == 0 && m_Config->playStartSound() && !m_PlayedStartSounds.contains(i.value()))
         {
             m_PlayedStartSounds.push_back(i.value());
-            PlaySound();
+            QSound::play(m_Config->startSoundFile());
         }
     }
 }
@@ -134,8 +134,3 @@ void CListUpdater::UpdateDisplayList()
     m_Context->setContextProperty("myModel", QVariant::fromValue(m_DisplayList));
 }
 
-void CListUpdater::PlaySound()
-{
-    CPlaySound* player = new CPlaySound(m_Config->startSoundFile());
-    QThreadPool::globalInstance()->start(player);
-}

@@ -9,6 +9,7 @@ class CConfiguration : public QObject
     Q_PROPERTY(QString file READ file WRITE setFile NOTIFY fileChanged)
     Q_PROPERTY(QString fileUrl READ fileUrl WRITE setFileUrl NOTIFY fileUrlChanged)
     Q_PROPERTY(QString startSoundFile READ startSoundFile WRITE setStartSoundFile NOTIFY startSoundFileChanged)
+    Q_PROPERTY(QString startSoundFileUrl READ startSoundFileUrl WRITE setStartSoundFileUrl NOTIFY startSoundFileUrlChanged)
     Q_PROPERTY(int lookAhead READ lookAhead WRITE setLookAhead NOTIFY lookAheadChanged)
     Q_PROPERTY(int stale READ stale WRITE setStale NOTIFY staleChanged)
     Q_PROPERTY(int maxDisplay READ maxDisplay WRITE setMaxDisplay NOTIFY maxDisplayChanged)
@@ -19,12 +20,14 @@ public:
     void setFile(const QString &a);
     void setFileUrl(const QString &a);
     void setStartSoundFile(const QString& a);
+    void setStartSoundFileUrl(const QString& a);
     void setLookAhead(int a);
     void setStale(int a);
     void setMaxDisplay(int a);
     QString file() const { return m_File; }
     QString fileUrl() const { return m_FileUrl; }
     QString startSoundFile() const { return m_StartSoundFileName;}
+    QString startSoundFileUrl() const { return m_StartSoundFileUrl;}
     int lookAhead() const { return m_LookAhead; }
     int stale() const { return m_Stale; }
     int maxDisplay() const { return m_MaxDisplay; }
@@ -37,6 +40,7 @@ signals:
     void staleChanged();
     void maxDisplayChanged();
     void startSoundFileChanged();
+    void startSoundFileUrlChanged();
 
 public slots:
 
@@ -45,6 +49,7 @@ private:
     QString m_FileUrl;
     QString m_IniFileName;
     QString m_StartSoundFileName;
+    QString m_StartSoundFileUrl;
     int m_Stale;
     int m_MaxDisplay;
     int m_LookAhead;   

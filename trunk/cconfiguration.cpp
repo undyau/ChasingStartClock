@@ -60,6 +60,15 @@ void CConfiguration::setStartSoundFile(const QString &a)
     }
 }
 
+void CConfiguration::setStartSoundFileUrl(const QString &a)
+{
+    if (a != m_StartSoundFileUrl) {
+        m_StartSoundFileUrl = a;
+        emit startSoundFileUrlChanged();
+        setStartSoundFile(QUrl(m_StartSoundFileUrl).toLocalFile());
+    }
+}
+
 void CConfiguration::setLookAhead(int a)
 {
     if (a != m_LookAhead) {

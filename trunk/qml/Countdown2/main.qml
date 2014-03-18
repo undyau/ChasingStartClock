@@ -32,7 +32,8 @@ Rectangle {
 
     Item {
         id: form
-        anchors.verticalCenter:  parent.verticalCenter
+        anchors.top:  parent.top
+        height: parent.height -50
         anchors.left: parent.left
         visible: false
         width: Math.min(clockRect.width, 30)
@@ -200,8 +201,8 @@ Rectangle {
         title: "Choose the sound file to play"
         nameFilters: [ "WAV files (*.wav)","All files (*)" ]
         onAccepted: {
-           // startSoundFileName = startSoundFileDialog.fileUrl.toLocalFile;
-            myConfig.startSoundFile = startSoundFileDialog.fileUrl.toLocalFile;
+            myConfig.startSoundFileUrl = startSoundFileDialog.fileUrl;
+            startSoundFileName = myConfig.startSoundFile;
         }
     }
     ListView {

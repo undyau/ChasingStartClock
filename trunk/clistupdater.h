@@ -30,7 +30,6 @@ private:
     bool LoadRunners(QString &a_FileName);
     void GetDisplayList(QList<QObject *> &a_List);
     void FakeStartList();
-    void PlaySound();
 
 signals:
     
