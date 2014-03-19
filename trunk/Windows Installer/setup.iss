@@ -34,11 +34,31 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
+Name: "installbeep"; Description: "Install a sample 'start beep' sound file to the desktop"; GroupDescription: "Install samples"
 
 [Files]
 Source: "Countdown2.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "*"; Excludes: "AAReadme.txt,*.iss,setup.exe"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "*"; Excludes: "AAReadme.txt,*.iss,setup.exe,*.wav"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "StartBeep.wav"; DestDir: "{userdesktop}"; Check: CheckInstallBeepFile;
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
+
+[Code]
+var
+InstallBeepFile : Boolean;
+
+function NextButtonClick(CurPageID: Integer): Boolean;
+begin
+  Result := True;
+  if CurPageID = wpSelectTasks then
+  begin
+    InstallBeepFile :=  WizardForm.TasksList.Checked[3];
+  end;
+end;
+
+function CheckInstallBeepFile : Boolean;
+begin
+  Result := InstallBeepFile;
+end;
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"

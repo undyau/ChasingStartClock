@@ -1,7 +1,10 @@
-Latest Release: 1.4.0 18th March 2014
+Latest Release: 1.4.0 19th March 2014
 
 
 History
+1.4.0  19th March 2014
+New: Added installation of a sample "beep" sound file to setup.
+
 1.4.0  19th March 2014
 Fix: Qt5MultiMedia.dll missing from setup.
 
