@@ -1,7 +1,9 @@
-Latest Release: 1.4.0 19th March 2014
-
+Latest Release: 1.5.0 27th August 2015
 
 History
+1.5.0 27th August 2015
+Change: Program no longer closes if you click on main screen.
+
 1.4.0  19th March 2014
 New: Added installation of a sample "beep" sound file to setup.
 

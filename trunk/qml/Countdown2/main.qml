@@ -8,9 +8,9 @@ Rectangle {
     color: "grey"
     MouseArea {
         anchors.fill: parent
-        onClicked: {
-            Qt.quit();
-        }
+     //    onClicked: {
+     //       Qt.quit();
+     //   }
     }
 
     Rectangle {
