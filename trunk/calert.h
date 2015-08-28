@@ -11,6 +11,7 @@ public:
     explicit CAlert(QObject *parent = 0);
     void setMessage(const QString &a);
     QString message() const { return m_Message; }
+    void clearMessage();
     
 signals:
     void messageChanged();

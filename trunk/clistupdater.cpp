@@ -19,6 +19,7 @@ CListUpdater::CListUpdater(QQmlContext *a_Context,  CConfiguration* a_Config, CA
     connect(m_Config, SIGNAL(lookAheadChanged()), this, SLOT(Update()));
     connect(m_Config, SIGNAL(staleChanged()), this, SLOT(Update()));
     connect(m_Config, SIGNAL(maxDisplayChanged()), this, SLOT(Update()));
+    connect(m_Config, SIGNAL(timesAreUtcChanged()), this, SLOT(Reload()));
 }
 
 CListUpdater::~CListUpdater()
@@ -62,7 +63,7 @@ bool CListUpdater::LoadRunners(QString& a_FileName)
     else
     {
         QXmlSimpleReader parser;
-        CIof3XmlContentHandler* handler = new CIof3XmlContentHandler(m_AllRunners, m_Alert);
+        CIof3XmlContentHandler* handler = new CIof3XmlContentHandler(m_AllRunners, m_Alert, m_Config->timesAreUtc());
         parser.setContentHandler(handler);
 
         if(parser.parse(new QXmlInputSource(new QFile(a_FileName))))

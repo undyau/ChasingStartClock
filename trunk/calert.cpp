@@ -12,6 +12,11 @@ void CAlert::setMessage(const QString &a)
     {
         m_Message = a;
         emit messageChanged();
-        qDebug() << "Sent alert";
+//        qDebug() << "Sent alert";
     }
+}
+
+void CAlert::clearMessage()
+{
+    setMessage("");
 }

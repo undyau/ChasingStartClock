@@ -13,6 +13,7 @@ class CConfiguration : public QObject
     Q_PROPERTY(int lookAhead READ lookAhead WRITE setLookAhead NOTIFY lookAheadChanged)
     Q_PROPERTY(int stale READ stale WRITE setStale NOTIFY staleChanged)
     Q_PROPERTY(int maxDisplay READ maxDisplay WRITE setMaxDisplay NOTIFY maxDisplayChanged)
+    Q_PROPERTY(bool timesAreUtc READ timesAreUtc WRITE setTimesAreUtc NOTIFY timesAreUtcChanged)
 public:
     explicit CConfiguration(const QString& a_File = "", int a_LookAhead = 10,
                             int a_Stale = -3, int a_MaxDisplay = 10, QObject *parent = 0);
@@ -32,6 +33,8 @@ public:
     int stale() const { return m_Stale; }
     int maxDisplay() const { return m_MaxDisplay; }
     bool playStartSound() const { return !!m_StartSoundFileName.size(); }
+    bool timesAreUtc() const;
+    void setTimesAreUtc(bool a_TimesAreUtc);
 
 signals:
     void fileChanged();
@@ -41,6 +44,7 @@ signals:
     void maxDisplayChanged();
     void startSoundFileChanged();
     void startSoundFileUrlChanged();
+    void timesAreUtcChanged();
 
 public slots:
 
@@ -52,7 +56,8 @@ private:
     QString m_StartSoundFileUrl;
     int m_Stale;
     int m_MaxDisplay;
-    int m_LookAhead;   
+    int m_LookAhead;
+    bool m_TimesAreUtc;
 };
 
 #endif // CCONFIGURATION_H

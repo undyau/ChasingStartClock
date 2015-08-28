@@ -2,15 +2,13 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Dialogs 1.0
 import QtQuick.Layouts 1.0
+import QtQuick.Controls.Styles 1.0
 
 Rectangle {
     id: mainRect
     color: "grey"
     MouseArea {
         anchors.fill: parent
-     //    onClicked: {
-     //       Qt.quit();
-     //   }
     }
 
     Rectangle {
@@ -109,14 +107,35 @@ Rectangle {
                }
             }
             Label {
-                text: "(Enter \"FAKE\" as file name to simulate start list)"
+                text: "(Set \"FAKE\" as file to simulate)"
                 font.pixelSize: 12
                 color: "white"
             }
-            Label {
-                text: ""
-                font.pixelSize: 12
-                color: "white"
+            CheckBox {
+             //   text: "UTC times in file"
+                id: utcCheckBox
+                checked: myConfig.timesAreUtc
+                style: CheckBoxStyle {
+                    indicator: Rectangle {
+                            implicitWidth: 16
+                            implicitHeight: 16
+                            radius: 1
+                            border.color: control.activeFocus ? "white" : "white"
+                            border.width: 2
+                            Rectangle {
+                                visible: control.checked
+                                color: "#555"
+                                border.color: "#333"
+                                radius: 1
+                                anchors.margins: 4
+                                anchors.fill: parent
+                            }
+                    }
+                    label: Text {
+                                color: "white"
+                                text: utcLabelText()
+                    }
+                }
             }
             Label {
                 text: ""
@@ -153,6 +172,7 @@ Rectangle {
                    myConfig.stale = staleText.text;
                    myConfig.lookAhead = lookAheadText.text;
                    myConfig.startSoundFile = startSoundFileName.text;
+                   myConfig.timesAreUtc = utcCheckBox.checked;
                    hideConfig();                   
                }
             }
@@ -295,6 +315,13 @@ Rectangle {
         clockRect.visible = false;
         listview.visible = false;
         configOnButton.visible = false;
+    }
+    function utcLabelText()
+    {
+        if (utcCheckBox.checked)
+            return "Times are UTC";
+        else
+            return "Times are local";
     }
 
 }

@@ -1,6 +1,10 @@
-Latest Release: 1.5.0 27th August 2015
+Latest Release: 1.5.1 28th August 2015
 
 History
+1.5.1 28th August 2015
+New: Provide config option in case start times in file are
+     not in UTC (ie if they are local).
+
 1.5.0 27th August 2015
 Change: Program no longer closes if you click on main screen.
 
